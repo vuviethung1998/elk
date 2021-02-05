@@ -6,8 +6,8 @@ services:
       context: ./config/elasticsearch
       dockerfile: Dockerfile
     environment:
-      ELASTIC_USERNAME: "elastic"
-      ELASTIC_PASSWORD: "MyPwd123"
+      ELASTIC_USERNAME: "admin"
+      ELASTIC_PASSWORD: "admin"
     volumes:
       - ./data/elasticsearch/data:/usr/share/elasticsearch/data
       - ./data/elasticsearch/backups:/usr/share/elasticsearch/backups
