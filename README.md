@@ -21,8 +21,8 @@ sudo chmod -R 777 /path_to_project/data
 Kibana is a web application that you access through port 5601. Go to url: http://localhost:5601 with login information:
 
 ```
-Username: elastic
-Password: MyPwd123
+Username: admin
+Password: admin
 ```
 
 ![Kibana service](kibana.png)
