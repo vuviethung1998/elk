@@ -6,29 +6,43 @@ services:
       context: ./config/elasticsearch
       dockerfile: Dockerfile
     environment:
+      ES_JAVA_OPTS: "-Xmx512m -Xms512m"
       ELASTIC_USERNAME: "admin"
       ELASTIC_PASSWORD: "admin"
     volumes:
       - ./data/elasticsearch/data:/usr/share/elasticsearch/data
       - ./data/elasticsearch/backups:/usr/share/elasticsearch/backups
       - ./config/elasticsearch/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml:ro
-    expose:
-      - "9200"
-      - "9300"
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+    networks:
+      - elk
 
   kibana:
-    image: docker.elastic.co/kibana/kibana:6.3.0
+    image: docker.elastic.co/kibana/kibana:6.5.0
     volumes:
       - ./config/kibana/kibana.yml:/usr/share/kibana/config/kibana.yml:ro
       - ./data/kibana/log:/var/log:rw
-    links:
-      - elasticsearch
+    networks:
+      - elk
     ports:
       - 5601:5601
+    depends_on:
+      - elasticsearch
 
   logstash:
-    image: docker.elastic.co/logstash/logstash:6.3.0
+    image: docker.elastic.co/logstash/logstash:6.5.0
     volumes:
       - ./config/logstash/logstash.conf/:/usr/share/logstash/pipeline/logstash.conf
-    links:
+    environment:
+      LS_JAVA_OPTS: "-Xmx256m -Xms256m" 
+    networks:
+      - elk
+    depends_on:
       - elasticsearch
+
+networks:
+  elk:
+    driver: bridge
+
