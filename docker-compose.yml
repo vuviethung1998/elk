@@ -6,9 +6,7 @@ services:
       context: ./config/elasticsearch
       dockerfile: Dockerfile
     environment:
-      ES_JAVA_OPTS: "-Xmx512m -Xms512m"
-      ELASTIC_USERNAME: "admin"
-      ELASTIC_PASSWORD: "admin"
+      ES_JAVA_OPTS: "-Xmx512m -Xms512m" 
     volumes:
       - ./data/elasticsearch/data:/usr/share/elasticsearch/data
       - ./data/elasticsearch/backups:/usr/share/elasticsearch/backups
