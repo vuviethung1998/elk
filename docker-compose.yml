@@ -6,7 +6,7 @@ services:
       context: ./config/elasticsearch
       dockerfile: Dockerfile
     environment:
-      ES_JAVA_OPTS: "-Xmx512m -Xms512m" 
+      ES_JAVA_OPTS: "-Xmx1g -Xms1g" 
     volumes:
       - ./data/elasticsearch/data:/usr/share/elasticsearch/data
       - ./data/elasticsearch/backups:/usr/share/elasticsearch/backups
